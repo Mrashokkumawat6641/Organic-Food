@@ -1,0 +1,192 @@
+    {
+        "openapi": "3.0.0",
+        "info": {
+            "title": "Client Project API",
+            "description": "Auto-generated Swagger docs",
+            "version": "1.0.0"
+        },
+        "servers": [
+            {
+                "url": "http://localhost:5000/api"
+            }
+        ],
+        "components": {
+            "securitySchemes": {
+                "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT"
+                }
+            }
+        },
+        "security": [
+            {
+                "bearerAuth": []
+            }
+        ],
+        "paths": {
+            "/auth/signup": {
+                "post": {
+                    "summary": "Register a new user",
+                    "tags": [
+                        "Auth"
+                    ],
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "fullname",
+                                        "emailaddress",
+                                        "password"
+                                    ],
+                                    "properties": {
+                                        "fullname": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "emailaddress": {
+                                            "type": "string",
+                                            "example": "john@example.com"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "StrongPass123"
+                                        },
+                                        "confirmpassword": {
+                                            "type": "string",
+                                            "example": "StrongPass123"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "User registered successfully",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "User registered successfully"
+                                                    },
+                                                    "userId": {
+                                                        "type": "string",
+                                                        "example": "647f2a8f1a3f7a3b2c123456"
+                                                    }
+                                                }
+                                            },
+                                            "error": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": []
+                                            },
+                                            "responseCode": {
+                                                "type": "integer",
+                                                "example": 201
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request - Missing or invalid fields",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "object"
+                                            },
+                                            "error": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "fullname, emailaddress, and password are required"
+                                                ]
+                                            },
+                                            "responseCode": {
+                                                "type": "integer",
+                                                "example": 400
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "409": {
+                            "description": "Conflict - Email already exists",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "object"
+                                            },
+                                            "error": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "Email already exists"
+                                                ]
+                                            },
+                                            "responseCode": {
+                                                "type": "integer",
+                                                "example": 409
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "500": {
+                            "description": "Internal Server Error",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "object"
+                                            },
+                                            "error": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "Internal Server Error"
+                                                ]
+                                            },
+                                            "responseCode": {
+                                                "type": "integer",
+                                                "example": 500
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
