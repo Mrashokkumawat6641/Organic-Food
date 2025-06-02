@@ -11,6 +11,7 @@ const router = express.Router();
 router.post('/Signup', validateBody(registerSchema), registerUser);
 router.post('/signin', validateBody(loginSchema), signin)
 router.post('/logout', authMiddleware, logout);
+router.get('/getAllUsers', getAllusers );
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { session: false }), async (req, res) => {
     const token = generateToken(req.user._id);

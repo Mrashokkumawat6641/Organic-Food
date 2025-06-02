@@ -52,3 +52,12 @@ export const logout = async (req, res) => {
   }
 };
 
+export const getAllusers = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+    return successResponse(res, { users }, 200);
+  } catch (error) {
+    logger.error('Get all users error:', error);
+    return errorResponse(res, error.message, 500);
+  }
+}

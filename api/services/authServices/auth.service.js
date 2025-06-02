@@ -121,3 +121,11 @@ export const logoutUser = async (token, exp) => {
     console.log('Token already expired');
   }
 };
+
+export const getAllUsers = async () => {
+  const users = await User.find({}, '-password -confirmPassword');
+  if (!users || users.length === 0) {
+    throw new Error('No users found');
+  }
+  return users;
+}
