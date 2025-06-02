@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, signin, logout } from '../../controllers/authController/auth.controller.js';
+import { registerUser, signin, logout ,getAlluser} from '../../controllers/authController/auth.controller.js';
 import { validateBody } from '../../../middlewares/validate.middleware.js';
 import { isAdmin } from '../../../middlewares/admin.middleware.js';
 import { registerSchema } from '../../validators/authValidators/auth.validator.js'
@@ -11,7 +11,11 @@ const router = express.Router();
 router.post('/Signup', validateBody(registerSchema), registerUser);
 router.post('/signin', validateBody(loginSchema), signin)
 router.post('/logout', authMiddleware, logout);
+<<<<<<< HEAD
 router.get('/getAllUsers', getAllusers );
+=======
+router.get('/getAllUsers', getAlluser );
+>>>>>>> 0b953d9 (git push)
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { session: false }), async (req, res) => {
     const token = generateToken(req.user._id);

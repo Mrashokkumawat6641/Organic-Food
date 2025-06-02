@@ -1,4 +1,4 @@
-import { register, loginuser, logoutUser } from '../../services/authServices/auth.service.js';
+import { register, loginuser, logoutUser, getAllUsers } from '../../services/authServices/auth.service.js';
 import logger from '../../../utils/logger.js';
 import { successResponse, errorResponse } from '../../../utils/response.js';
 import { token } from 'morgan';
@@ -52,7 +52,7 @@ export const logout = async (req, res) => {
   }
 };
 
-export const getAllusers = async (req, res) => {
+export const getAlluser = async (req, res) => {
   try {
     const users = await getAllUsers();
     return successResponse(res, { users }, 200);
