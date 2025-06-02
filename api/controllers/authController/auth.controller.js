@@ -34,6 +34,7 @@ export const signin = async (req, res) => {
   }
 };
 
+
 export const logout = async (req, res) => {
   try {
     const token = req.token;
