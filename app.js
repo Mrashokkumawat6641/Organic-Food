@@ -67,7 +67,7 @@ app.use((req, res, next) => {
 });
 
 // app.use(cors(corsOptions));
-app.use(express.json());
+// app.use(express.json());
 app.use(passport.initialize());
 app.use('/api/auth', authRoutes);
 app.use('/api/image', imageRoutes);
