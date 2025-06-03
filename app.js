@@ -20,6 +20,9 @@ const __dirname = path.dirname(__filename);
 
 const swaggerFilePath = path.join(__dirname, 'swagger', 'swagger-output.json');
 const swaggerDocument = JSON.parse(fs.readFileSync(swaggerFilePath, 'utf-8'));
+
+swaggerData = swaggerDocument.replace(/\$\{DEBUG_URL\}/g, process.env.DEBUG_URL || 'http://localhost:3000');
+
 // const corsOptions = {
 //   origin: [
 //     '*',
