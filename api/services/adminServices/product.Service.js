@@ -1,42 +1,46 @@
 import Products from '../../models/adminModels/product.Model.js';
 import { getRedisClient } from '../../../database/redis/redis.js';
+import { getNextSequence } from '../../Function/CounterFunction.js';
 
-export class UserService {
-    constructor(redisClient) {      
-        this.redisClient = redisClient;
+
+export const addNewUser = async ({
+    id,
+    Learners,
+    email,
+    avatar,
+    country,
+    Language,
+    Occupation,
+    Objective,
+    Subscription
+}) => {
+    if (!Learners || !email || !avatar || !country || !Language || !Occupation || !Objective || !Subscription) {
+        throw new Error('Please fill in all fields');
     }
-
-    async fetchUsers(page = 1, limit = 10) {
-        page = parseInt(page);
-        limit = parseInt(limit);
-
-        const skip = (page - 1) * limit;
-        const cacheKey = `users:${page}:${limit}`;
-
-        const cached = await this.redisClient.get(cacheKey);
-        if (cached) {
-            return JSON.parse(cached);
-        }
-
-        const totalUsers = await Products.countDocuments();
-        const users = await Products.find({})
-            .skip(skip)
-            .limit(limit)
-            .select('-__v -_id')
-            .lean();
-
-        const totalPages = Math.ceil(totalUsers / limit);
-
-        const result = {
-            totalUsers,
-            currentPage: page,
-            totalPages,
-            pageSize: limit,     
-            users
-        };
-
-        await this.redisClient.setEx(cacheKey, 600, JSON.stringify(result));
-
-        return result;
+    const existingUser = await Products.findOne({ email });
+    if (existingUser) {
+        const error = new Error('User already exists');
+        error.status = 409;
+        throw error;
     }
-}
+    const customId = await getNextSequence('userId');
+    const newUser = new Products({
+        id: customId,
+        Learners,
+        email,
+        avatar,
+        country,
+        Language,
+        Occupation,
+        Objective,
+        Subscription
+    });
+    await newUser.save();
+
+    return {
+        message: 'User registered successfully',
+        user: newUser,
+        id: newUser.id,
+
+    };
+};

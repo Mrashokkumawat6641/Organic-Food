@@ -1,9 +1,9 @@
 import express from 'express';
-import { getUsers } from '../../controllers/adminControllers/products.controller.js';
+import { addNewUsers } from '../../controllers/adminControllers/products.controller.js';
 import { validateBody } from '../../../middlewares/validate.middleware.js';
-import { userListQuerySchema } from '../../validators/adminValidator/product.Validator.js';
+import { newUser } from '../../validators/adminValidator/product.Validator.js';
 const router = express.Router();
 
-router.get('/getAllUsers', getUsers);
+router.post('/addNewUsers', addNewUsers);
 
 export default router;

@@ -1,6 +1,7 @@
 import cloudinary from '../../../utils/cloudinary.js';
 import fs from 'fs';
 
+
 export const uploadImage = async (localPath) => {
     try {
         const result = await cloudinary.uploader.upload(localPath);

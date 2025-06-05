@@ -1,10 +1,11 @@
 // import { number, optional, required, string } from 'joi';
-import {countryEnum, languageEnum} from '../common.model.js'
+import { countryEnum, languageEnum } from '../common.model.js'
 import mongoose from 'mongoose';
 
 const ProductsSchema = new mongoose.Schema({
     id: {
-        type: String,
+        type: Number,
+        unique: true,
         required: true
     },
     Learners: {
@@ -27,7 +28,7 @@ const ProductsSchema = new mongoose.Schema({
         required: false || true,
         default: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7t   zqwlr1m.jpg'
     },
-    country: {  
+    country: {
         type: String,
         enum: countryEnum,
         required: true
