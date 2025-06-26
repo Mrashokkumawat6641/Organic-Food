@@ -9,6 +9,7 @@ import { router as allRoutes } from './api/routes/commonRoutes/index.js';
 
 
 import bodyParser from 'body-parser';
+import { SWAGGER_TOKEN } from './env.js';
 
 const app = express();
 
@@ -48,11 +49,11 @@ app.get('/', (req, res) => {
 });
 app.use('/api', allRoutes);
 app.use('/api-docs', (req, res, next) => {
-    const token = req.headers['x-doc-token'];
-    if (token !== SWAGGER_TOKEN) {
-        return res.status(403).json({ message: 'Access denied' });
-    }
-    next();
+  const token = req.headers['x-doc-token'];
+  if (token !== SWAGGER_TOKEN) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
 }, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
