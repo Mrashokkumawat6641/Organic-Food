@@ -13,10 +13,10 @@ export const registerUser = async (req, res, next) => {
         description: 'User registration details',
         required: true,
         schema: {
-          $name: 'John Doe',
-          $email: ' johndoe@example.com',
+          $fullname: 'John Doe',
+          $emailaddress: ' johndoe@example.com',
           $password: 'password123',
-          $confirmPassword: 'password123',
+          $confirmpassword: 'password123',
         }
       } */
   try {
@@ -41,7 +41,7 @@ export const signin = async (req, res) => {
         description: 'User login details',
         required: true,
         schema: {
-          $email: ' johndoe@example.com', 
+          $emailaddress: ' johndoe@example.com', 
           $password: 'password123', 
         }
       } */
