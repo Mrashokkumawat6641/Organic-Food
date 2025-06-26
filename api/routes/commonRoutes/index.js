@@ -1,0 +1,14 @@
+import express from 'express';
+import authRoutes from '../authRoutes/auth.routes.js';
+import imageRoutes from '../adminRoutes/image.routes.js';
+import adminRoutes from '../adminRoutes/product.Routes.js';
+import customerRoute from '../adminRoutes/customer.routes.js';
+
+const router = express.Router();
+
+router.use('/api/auth', authRoutes);
+router.use('/api/image', imageRoutes);
+router.use('/api/products', adminRoutes);
+router.use('/api/customers', customerRoute);
+
+export { router };

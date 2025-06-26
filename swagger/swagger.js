@@ -1,52 +1,26 @@
 import swaggerAutogen from 'swagger-autogen';
+import { PORT } from '../env.js';
+
 const doc = {
     info: {
         title: 'Client Project API',
-        description: 'Auto-generated Swagger docs',
+        description: 'API documentation for Client Project API',
     },
-    host: 'localhost:5000',
-    schemes: ['http'],
+    host: `localhost:${PORT}`,
     basePath: '/api',
-    components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer',
-                bearerFormat: 'JWT'
-            }
+    schemes: ['http'],
+    securityDefinitions: {
+        bearerAuth: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+            description: 'Enter JWT token as: Bearer <token>',
         },
-        schemas: {
-            ApiResponse: {
-                type: 'object',
-                properties: {
-                    data: {
-                        type: 'object',
-                        example: {}
-                    },
-                    error: {
-                        type: 'array',
-                        items: {
-                            type: 'string'
-                        },
-                        example: []
-                    },
-                    responseCode: {
-                        type: 'integer',
-                        example: 200
-                    }
-                }
-            }
-        }
-    }
+    },
+    security: [{ bearerAuth: [] }],
 };
 
-const outputFile = [
-    './swagger/swagger-output.json', 
-    './swagger/swagger-output-image.json'
-]
-const endpointsFiles = [
-    './api/routes/authRoutes/auth.routes.js',
-    './api/routes/adminRoutes/image.routes.js'
-];
+const outputFile = './swagger/swagger-output.json';
+const endpointsFiles = ['./api/routes/commonRoutes/index.js'];
 
-swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
+swaggerAutogen()(outputFile, endpointsFiles, doc);

@@ -4,6 +4,6 @@ import { validateBody } from '../../../middlewares/validate.middleware.js';
 import { newUser } from '../../validators/adminValidator/product.Validator.js';
 const router = express.Router();
 
-router.post('/addNewUsers', addNewUsers);
+router.post('/addNewUsers', addNewUsers);   
 
 export default router;

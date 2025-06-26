@@ -1,10 +1,9 @@
 import { Redis } from '@upstash/redis';
-import dotenv from 'dotenv';
-dotenv.config();
+import { UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from '../../env.js';
 
 const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    url: UPSTASH_REDIS_REST_URL,
+    token: UPSTASH_REDIS_REST_TOKEN,
 });
 
 export default redis;

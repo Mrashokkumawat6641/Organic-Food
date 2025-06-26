@@ -1,10 +1,8 @@
 import app from './app.js';
 import { connectToDatabase } from './database/config/db.js';
 import { connectRedis } from './database/redis/redis.js';
+import { MONGO_URI, PORT, REDIS_PORT, Swagger_UI } from './env.js';
 import logger from './utils/logger.js';
-import dotenv from 'dotenv';
-dotenv.config();
-const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
     try {
@@ -16,10 +14,9 @@ const startServer = async () => {
 
         app.listen(PORT, () => {
             logger.info(`Server running at: http://localhost:${PORT}`);
-            logger.info(`MongoDB:         ${process.env.MONGO_URI}`);
-            logger.info(`Redis:           ${process.env.REDIS_PORT}`);
-
-            logger.info(`Swagger docs:     http://localhost:${PORT}/api-docs`);
+            logger.info(`MongoDB:         ${MONGO_URI}`);
+            logger.info(`Redis:           ${REDIS_PORT}`);
+            logger.info(`SwaggerUI:         http://localhost:${PORT}${Swagger_UI}`);
         });
     } catch (err) {
         logger.error('Startup error: ' + err.message);

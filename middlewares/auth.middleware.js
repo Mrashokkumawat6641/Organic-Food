@@ -1,9 +1,7 @@
 
 import jwt from 'jsonwebtoken';
 import { getRedisClient } from '../database/redis/redis.js';
-import dotenv from 'dotenv';
-dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+import { JWT_SECRET } from '../env.js';
 
 export const generateToken = (user) => {
   const payload = {

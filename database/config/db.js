@@ -1,15 +1,13 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import logger from '../../utils/logger.js';
-
-dotenv.config();
+import { MONGO_URI } from '../../env.js';
 
 const reconnectTimeout = 5000;
 
 export const connectToDatabase = async () => {
   try {
     // Connect using MONGO_URI from .env
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

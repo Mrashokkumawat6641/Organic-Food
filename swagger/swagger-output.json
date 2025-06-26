@@ -1,21 +1,448 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "Client Project API",
-    "description": "Auto-generated Swagger docs",
+    "description": "API documentation for Client Project API",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "http://localhost:5000/api"
-    }
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
   ],
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter JWT token as: Bearer <token>"
+    }
+  },
+  "paths": {
+    "/api/auth/Signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User registration",
+        "description": "This endpoint allows users to register by providing their details.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User registration details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": " johndoe@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password123"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "password123"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/auth/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User login",
+        "description": "This endpoint allows users to log in by providing their email and password.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User login details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": " johndoe@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password123"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User logout",
+        "description": "This endpoint allows users to log out by invalidating their token.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "User authentication token",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Bearer <token>"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/auth/getAllUsers": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get all users",
+        "description": "This endpoint retrieves all registered users.",
+        "responses": {
+          "200": {
+            "description": "List of all users"
+          }
+        }
+      }
+    },
+    "/api/auth/google": {
+      "get": {
+        "tags": [
+          "GoogleAuth"
+        ],
+        "summary": "Authenticate with Google",
+        "description": "Initiate Google OAuth authentication.",
+        "responses": {
+          "302": {
+            "description": "Redirects to Google for authentication."
+          }
+        }
+      }
+    },
+    "/api/auth/google/callback": {
+      "get": {
+        "tags": [
+          "GoogleAuth"
+        ],
+        "summary": "Google OAuth callback",
+        "description": "Handles Google OAuth callback and returns JWT token.",
+        "responses": {
+          "200": {
+            "description": "JWT token returned after successful authentication.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "jwt_token_here"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/facebook": {
+      "get": {
+        "tags": [
+          "FacebookAuth"
+        ],
+        "summary": "Authenticate with Facebook",
+        "description": "Initiate Facebook OAuth authentication.",
+        "responses": {
+          "302": {
+            "description": "Redirects to Facebook for authentication."
+          }
+        }
+      }
+    },
+    "/api/auth/facebook/callback": {
+      "get": {
+        "tags": [
+          "FacebookAuth"
+        ],
+        "summary": "Facebook OAuth callback",
+        "description": "Handles Facebook OAuth callback and returns JWT token.",
+        "responses": {
+          "200": {
+            "description": "JWT token returned after successful authentication.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "jwt_token_here"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/image/upload": {
+      "post": {
+        "tags": [
+          "Image"
+        ],
+        "summary": "Upload an image",
+        "description": "This endpoint allows users to upload an image file.",
+        "parameters": [
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Image file to upload",
+            "required": true,
+            "type": "file",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "format": {
+                  "type": "string",
+                  "example": "binary"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/products/addNewUsers": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add a new user",
+        "description": "This endpoint allows you to add a new user to the system.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "Learners": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "john.doe@example.com"
+                },
+                "avatar": {
+                  "type": "string",
+                  "example": "https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "USA"
+                },
+                "Language": {
+                  "type": "string",
+                  "example": "English"
+                },
+                "Occupation": {
+                  "type": "string",
+                  "example": "Engineer"
+                },
+                "Objective": {
+                  "type": "string",
+                  "example": "Learn about organic food"
+                },
+                "Subscription": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "required": [
+                "id",
+                "Learners",
+                "email",
+                "avatar",
+                "country",
+                "Language",
+                "Occupation",
+                "Objective",
+                "Subscription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/customers/add": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Add a new product",
+        "description": "This endpoint adds a new product to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Product details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Organic Apple"
+                },
+                "productImage": {
+                  "type": "string",
+                  "example": "https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Fresh organic apples from local farms"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 120
+                },
+                "discount": {
+                  "type": "number",
+                  "example": 10
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Fruits"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 4.5
+                },
+                "warrantyPeriod": {
+                  "type": "string",
+                  "example": "6 months"
+                },
+                "returnPolicy": {
+                  "type": "string",
+                  "example": "30 days return"
+                },
+                "stock": {
+                  "type": "number",
+                  "example": 50
+                }
+              },
+              "required": [
+                "title",
+                "productImage",
+                "description",
+                "price",
+                "discount",
+                "category",
+                "rating",
+                "warrantyPeriod",
+                "returnPolicy",
+                "stock"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     }
   },
@@ -23,407 +450,5 @@
     {
       "bearerAuth": []
     }
-  ],
-  "paths": {
-    "/auth/signup": {
-      "post": {
-        "summary": "Register a new user",
-        "tags": [
-          "Auth"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "fullname",
-                  "emailaddress",
-                  "password"
-                ],
-                "properties": {
-                  "fullname": {
-                    "type": "string",
-                    "example": "John Doe"
-                  },
-                  "emailaddress": {
-                    "type": "string",
-                    "example": "john@example.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "StrongPass123"
-                  },
-                  "confirmpassword": {
-                    "type": "string",
-                    "example": "StrongPass123"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "User registered successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "User registered successfully"
-                        },
-                        "userId": {
-                          "type": "string",
-                          "example": "647f2a8f1a3f7a3b2c123456"
-                        }
-                      }
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 201
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "fullname, emailaddress, and password ,role are required"
-                      ]
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 400
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Email already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "Email already exists"
-                      ]
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 409
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "Internal Server Error"
-                      ]
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 500
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/signin": {
-      "post": {
-        "summary": "Login User",
-        "tags": [
-          "Auth"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "emailaddress",
-                  "password"
-                ],
-                "properties": {
-                  "emailaddress": {
-                    "type": "string",
-                    "example": "john@example.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "StrongPass123"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Login successful"
-                        },
-                        "token": {
-                          "type": "string",
-                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                        }
-                      }
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 200
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid credentials",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "Invalid email or password"
-                      ]
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 401
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "Internal Server Error"
-                      ]
-                    },
-                    "responseCode": {
-                      "type": "integer",
-                      "example": 500
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/logout": {
-      "post": {
-        "summary": "Logout user and blacklist the JWT token",
-        "tags": [
-          "Auth"
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Logout successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Logout successful"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - invalid or missing token"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    },
-    "/api/auth/google": {
-      "get": {
-        "summary": "Google OAuth login",
-        "description": "Redirect user to Google for OAuth authentication.",
-        "responses": {
-          "302": {
-            "description": "Redirect to Google OAuth consent screen"
-          }
-        }
-      }
-    },
-    "/api/auth/google/callback": {
-      "get": {
-        "summary": "Google OAuth callback",
-        "description": "Google OAuth callback URL to handle OAuth response.",
-        "responses": {
-          "200": {
-            "description": "OAuth successful, returns JWT token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "description": "JWT access token"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized or OAuth failed"
-          }
-        }
-      }
-    },
-    "/api/auth/facebook": {
-      "get": {
-        "summary": "Facebook OAuth login",
-        "description": "Redirect user to Facebook for OAuth authentication.",
-        "responses": {
-          "302": {
-            "description": "Redirect to Facebook OAuth consent screen"
-          }
-        }
-      }
-    },
-    "/api/auth/facebook/callback": {
-      "get": {
-        "summary": "Facebook OAuth callback",
-        "description": "Facebook OAuth callback URL to handle OAuth response.",
-        "responses": {
-          "200": {
-            "description": "OAuth successful, returns JWT token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "description": "JWT access token"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized or OAuth failed"
-          }
-        }
-      }
-    }
-  }
+  ]
 }

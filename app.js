@@ -1,19 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import authRoutes from './api/routes/authRoutes/auth.routes.js';
-import imageRoutes from './api/routes/adminRoutes/image.routes.js';
 import passport from './database/config/passport.js';
-import adminRoutes from './api/routes/adminRoutes/product.Routes.js';
+import { router as allRoutes } from './api/routes/commonRoutes/index.js';
+
+
 import bodyParser from 'body-parser';
-dotenv.config();
 
 const app = express();
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,13 +40,12 @@ app.use((req, res, next) => {
 });
 
 app.use(cors(corsOptions));
-// app.use(express.json());
+app.use(express.json());
 app.use(passport.initialize());
-app.use('/api/auth', authRoutes);
-app.use('/api/image', imageRoutes);
-app.use('/api/products', adminRoutes);
-// app.use('/api/users', userRoutes);
-// app.use('/api', authRoutes);
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+app.use('/api', allRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

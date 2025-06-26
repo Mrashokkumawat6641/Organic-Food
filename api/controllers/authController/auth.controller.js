@@ -5,6 +5,20 @@ import { token } from 'morgan';
 import { getStatusCode } from 'routing-controllers-openapi';
 
 export const registerUser = async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+  // #swagger.summary = 'User registration'
+  // #swagger.description = 'This endpoint allows users to register by providing their details.'
+  /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'User registration details',
+        required: true,
+        schema: {
+          $name: 'John Doe',
+          $email: ' johndoe@example.com',
+          $password: 'password123',
+          $confirmPassword: 'password123',
+        }
+      } */
   try {
     const result = await register(req.body);
     return successResponse(res, {
@@ -19,6 +33,18 @@ export const registerUser = async (req, res, next) => {
 };
 
 export const signin = async (req, res) => {
+  // #swagger.tags = ['Auth']
+  // #swagger.summary = 'User login'
+  // #swagger.description = 'This endpoint allows users to log in by providing their email and password.'
+  /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'User login details',
+        required: true,
+        schema: {
+          $email: ' johndoe@example.com', 
+          $password: 'password123', 
+        }
+      } */
   try {
     const result = await loginuser(req.body);
     console.log('Login result:', req.body);
@@ -36,6 +62,18 @@ export const signin = async (req, res) => {
 
 
 export const logout = async (req, res) => {
+  // #swagger.tags = ['Auth']
+  // #swagger.summary = 'User logout'
+  // #swagger.description = 'This endpoint allows users to log out by invalidating their token.'
+  /*  #swagger.parameters['token'] = {
+        in: 'header',
+        description: 'User authentication token',
+        required: true,
+        type: 'string',
+        schema: {
+          $type: 'Bearer <token>'
+        }
+      } */
   try {
     const token = req.token;
     const decoded = req.user;
@@ -54,6 +92,13 @@ export const logout = async (req, res) => {
 };
 
 export const getAlluser = async (req, res) => {
+  // #swagger.tags = ['Auth']
+  // #swagger.summary = 'Get all users'
+  // #swagger.description = 'This endpoint retrieves all registered users.'
+  /*  #swagger.responses[200] = {
+        description: 'List of all users',
+    }
+        */
   try {
     const users = await getAllUsers();
     return successResponse(res, { users }, 200);
