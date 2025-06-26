@@ -21,6 +21,7 @@ export const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL;
 export const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL;
 // export const SwaggerUI = process.env.SwaggerUI;
 export const Swagger_UI = process.env.Swagger_UI;
+export const SWAGGER_TOKEN = process.env.SWAGGER_TOKEN;
 
 export const BaseAPI = process.env.BaseAPI;
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
