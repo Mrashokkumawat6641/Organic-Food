@@ -35,11 +35,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "fullname": {
                   "type": "string",
                   "example": "John Doe"
                 },
-                "email": {
+                "emailaddress": {
                   "type": "string",
                   "example": " johndoe@example.com"
                 },
@@ -53,8 +53,8 @@
                 }
               },
               "required": [
-                "name",
-                "email",
+                "fullname",
+                "emailaddress",
                 "password",
                 "confirmPassword"
               ]
@@ -84,7 +84,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "emailaddress": {
                   "type": "string",
                   "example": " johndoe@example.com"
                 },
@@ -94,7 +94,7 @@
                 }
               },
               "required": [
-                "email",
+                "emailaddress",
                 "password"
               ]
             }
