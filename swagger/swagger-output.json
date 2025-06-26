@@ -47,7 +47,7 @@
                   "type": "string",
                   "example": "password123"
                 },
-                "confirmPassword": {
+                "confirmpassword": {
                   "type": "string",
                   "example": "password123"
                 }
@@ -56,7 +56,7 @@
                 "fullname",
                 "emailaddress",
                 "password",
-                "confirmPassword"
+                "confirmpassword"
               ]
             }
           }

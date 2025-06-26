@@ -16,7 +16,7 @@ export const registerUser = async (req, res, next) => {
           $fullname: 'John Doe',
           $emailaddress: ' johndoe@example.com',
           $password: 'password123',
-          $confirmPassword: 'password123',
+          $confirmpassword: 'password123',
         }
       } */
   try {
