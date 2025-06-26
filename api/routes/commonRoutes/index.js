@@ -6,9 +6,9 @@ import customerRoute from '../adminRoutes/customer.routes.js';
 
 const router = express.Router();
 
-router.use('/api/auth', authRoutes);
-router.use('/api/image', imageRoutes);
-router.use('/api/products', adminRoutes);
-router.use('/api/customers', customerRoute);
+router.use('/auth', authRoutes);
+router.use('/image', imageRoutes);
+router.use('/products', adminRoutes);
+router.use('/customers', customerRoute);
 
 export { router };

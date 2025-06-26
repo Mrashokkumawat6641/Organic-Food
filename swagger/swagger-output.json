@@ -19,7 +19,7 @@
     }
   },
   "paths": {
-    "/api/auth/Signup": {
+    "/auth/Signup": {
       "post": {
         "tags": [
           "Auth"
@@ -68,7 +68,7 @@
         }
       }
     },
-    "/api/auth/signin": {
+    "/auth/signin": {
       "post": {
         "tags": [
           "Auth"
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/api/auth/logout": {
+    "/auth/logout": {
       "post": {
         "tags": [
           "Auth"
@@ -156,7 +156,7 @@
         }
       }
     },
-    "/api/auth/getAllUsers": {
+    "/auth/getAllUsers": {
       "get": {
         "tags": [
           "Auth"
@@ -170,7 +170,7 @@
         }
       }
     },
-    "/api/auth/google": {
+    "/auth/google": {
       "get": {
         "tags": [
           "GoogleAuth"
@@ -184,7 +184,7 @@
         }
       }
     },
-    "/api/auth/google/callback": {
+    "/auth/google/callback": {
       "get": {
         "tags": [
           "GoogleAuth"
@@ -210,7 +210,7 @@
         }
       }
     },
-    "/api/auth/facebook": {
+    "/auth/facebook": {
       "get": {
         "tags": [
           "FacebookAuth"
@@ -224,7 +224,7 @@
         }
       }
     },
-    "/api/auth/facebook/callback": {
+    "/auth/facebook/callback": {
       "get": {
         "tags": [
           "FacebookAuth"
@@ -250,7 +250,7 @@
         }
       }
     },
-    "/api/image/upload": {
+    "/image/upload": {
       "post": {
         "tags": [
           "Image"
@@ -292,7 +292,7 @@
         }
       }
     },
-    "/api/products/addNewUsers": {
+    "/products/addNewUsers": {
       "post": {
         "tags": [
           "User"
@@ -366,7 +366,7 @@
         }
       }
     },
-    "/api/customers/add": {
+    "/customers/add": {
       "post": {
         "tags": [
           "Product"

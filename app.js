@@ -25,6 +25,7 @@ const corsOptions = {
     'https://assuring-javelin-smoothly.ngrok-free.app',
     'http://152.58.70.211:5173',
     'http://[2409:40d4:32:74b6:486a:76ff:fe41:823b]:5173',
+     'http://192.168.164.8:5173' ,
     'https://organic-food-fronted.vercel.app',
     'https://organic-food-dt19.onrender.com',
 
