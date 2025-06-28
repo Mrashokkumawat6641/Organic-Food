@@ -377,7 +377,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Product details",
             "required": true,
             "schema": {
               "type": "object",
@@ -451,7 +450,7 @@
           "Google Auth"
         ],
         "summary": "Google login",
-        "description": "This endpoint allows users to log in using their Google account.",
+        "description": "Google login using idToken from client",
         "responses": {
           "200": {
             "description": "OK"
@@ -459,36 +458,20 @@
         },
         "requestBody": {
           "required": true,
-          "description": "Google ID token",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "idToken"
+                ],
                 "properties": {
                   "idToken": {
                     "type": "string",
-                    "description": "Google ID token obtained from the client-side",
-                    "example": "ya29.a0ARrdaM9..."
+                    "description": "Google ID token",
+                    "example": "ya29.a0ARrdaM..."
                   }
-                },
-                "required": [
-                  "idToken"
-                ]
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "idToken": {
-                    "type": "string",
-                    "description": "Google ID token obtained from the client-side",
-                    "example": "ya29.a0ARrdaM9..."
-                  }
-                },
-                "required": [
-                  "idToken"
-                ]
+                }
               }
             }
           }

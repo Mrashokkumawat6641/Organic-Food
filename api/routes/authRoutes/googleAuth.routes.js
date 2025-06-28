@@ -3,6 +3,8 @@ import { googleLoginController } from '../../controllers/authController/googleAu
 
 const router = express.Router();
 
+
+
 router.post('/auth/google/login', googleLoginController);
 
 export default router;
