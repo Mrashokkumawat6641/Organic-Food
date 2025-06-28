@@ -5,10 +5,10 @@
     "description": "API documentation for Client Project API",
     "version": "1.0.0"
   },
-  "host": "https://organic-food-dt19.onrender.com",
+  "host": "localhost:5000",
   "basePath": "/api",
   "schemes": [
-    "https"
+    "http"
   ],
   "securityDefinitions": {
     "bearerAuth": {
@@ -441,6 +441,56 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/v1/auth/google/login": {
+      "post": {
+        "tags": [
+          "Google Auth"
+        ],
+        "summary": "Google login",
+        "description": "This endpoint allows users to log in using their Google account.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "description": "Google ID token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idToken": {
+                    "type": "string",
+                    "description": "Google ID token obtained from the client-side",
+                    "example": "ya29.a0ARrdaM9..."
+                  }
+                },
+                "required": [
+                  "idToken"
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idToken": {
+                    "type": "string",
+                    "description": "Google ID token obtained from the client-side",
+                    "example": "ya29.a0ARrdaM9..."
+                  }
+                },
+                "required": [
+                  "idToken"
+                ]
+              }
+            }
           }
         }
       }

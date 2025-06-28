@@ -9,7 +9,6 @@ import { router as allRoutes } from './api/routes/commonRoutes/index.js';
 
 
 import bodyParser from 'body-parser';
-import { SWAGGER_TOKEN } from './env.js';
 
 const app = express();
 
@@ -25,7 +24,6 @@ const corsOptions = {
     'https://assuring-javelin-smoothly.ngrok-free.app',
     'http://152.58.70.211:5173',
     'http://[2409:40d4:32:74b6:486a:76ff:fe41:823b]:5173',
-     'http://192.168.164.8:5173' ,
     'https://organic-food-fronted.vercel.app',
     'https://organic-food-dt19.onrender.com',
 
@@ -49,13 +47,6 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 app.use('/api', allRoutes);
-app.use('/api-docs', (req, res, next) => {
-  const token = req.headers['x-doc-token'];
-  if (token !== SWAGGER_TOKEN) {
-    return res.status(403).json({ message: 'Access denied' });
-  }
-  next();
-}, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

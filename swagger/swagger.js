@@ -6,9 +6,9 @@ const doc = {
         title: 'Client Project API',
         description: 'API documentation for Client Project API',
     },
-    host: 'https://organic-food-dt19.onrender.com',
+    host: `localhost:${PORT}`,
     basePath: '/api',
-    schemes: ['https'],
+    schemes: ['http'],
     securityDefinitions: {
         bearerAuth: {
             type: 'apiKey',
