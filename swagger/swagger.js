@@ -8,7 +8,7 @@ const doc = {
     },
     host: `localhost:${PORT}`,
     basePath: '/api',
-    schemes: ['http'],
+    schemes: ['https'],
     securityDefinitions: {
         bearerAuth: {
             type: 'apiKey',
