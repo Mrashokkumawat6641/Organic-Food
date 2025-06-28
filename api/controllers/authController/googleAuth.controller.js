@@ -2,25 +2,30 @@ import { getGoogleProfile } from '../../services/authServices/googleAuth.service
 import { validateGoogleLogin } from '../../services/authServices/gAuth.service.js';
 
 export const googleLoginController = async (req, res, next) => {
-    // #swagger.tags = ['Google Auth']
-    // #swagger.summary = 'Google login'
-    // #swagger.description = 'This endpoint allows users to log in using their Google account.'
-    /* #swagger.requestBody = {
-        required: true,
-        description: 'Google ID token',
-        required: true,
-        schema: {
-            type: 'object',
+/*
+  #swagger.tags = ['Google Auth']
+  #swagger.summary = 'Google login'
+  #swagger.description = 'Google login using idToken from client'
+  #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["idToken"],
             properties: {
-                idToken: {
-                    type: 'string',
-                    description: 'Google ID token obtained from the client-side',
-                    example: 'ya29.a0ARrdaM9...',
-                }
-            },
-            required: ['idToken']
+              idToken: {
+                type: "string",
+                description: "Google ID token",
+                example: "ya29.a0ARrdaM..."
+              }
             }
-        } */
+          }
+        }
+      }
+  }
+*/
+
     try {
         const { idToken } = req.body;
         const profile = await getGoogleProfile(idToken);

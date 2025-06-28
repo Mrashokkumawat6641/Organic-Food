@@ -1,13 +1,17 @@
-import CustomError from "../../../utils/response.js";
+import { generateToken } from "../../../middlewares/auth.middleware.js";
 
 export const validateGoogleLogin = async (provider, socialData) => {
-    if (!provider || !socialData) {
-        throw new CustomError('Provider and social data are required', 400);
-    }
-    return {
-        message: 'Google login successful',
-        provider,
-        user: socialData,
-        token: 'jwt_token_here',
-    };
+  const token = generateToken({
+    _id: socialData.id,
+    emailaddress: socialData.email,
+    fullname: `${socialData.firstName} ${socialData.lastName}`,
+    role: 'user' 
+  });
+
+  return {
+    message: 'Google login successful',
+    provider,
+    user: socialData,
+    token,
+  };
 };

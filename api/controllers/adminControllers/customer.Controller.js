@@ -7,10 +7,9 @@ export const addProduct = async (req, res) => {
     // #swagger.summary = 'Add a new product'
     // #swagger.description = 'This endpoint adds a new product to the database.'
     /*  #swagger.parameters['body'] = {
-        in: 'body',
-        description: 'Product details',
-        required: true,
-        schema: {
+          in: 'body',
+          required: true,
+          schema: {
             $title: 'Organic Apple',
             $productImage: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg',
             $description: 'Fresh organic apples from local farms',
@@ -21,8 +20,8 @@ export const addProduct = async (req, res) => {
             $warrantyPeriod: '6 months',
             $returnPolicy: '30 days return',
             $stock: 50
-        }
-      } */
+          }
+        } */
     try {
         const product = await createProduct(req.body);
         return successResponse(res, 'Product added successfully', 201, product);

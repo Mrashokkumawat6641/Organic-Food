@@ -2,6 +2,8 @@ import swaggerAutogen from 'swagger-autogen';
 import { PORT } from '../env.js';
 
 const doc = {
+    // openapi: '3.0.0',
+    "swagger": "2.0",
     info: {
         title: 'Client Project API',
         description: 'API documentation for Client Project API',
@@ -23,4 +25,5 @@ const doc = {
 const outputFile = './swagger/swagger-output.json';
 const endpointsFiles = ['./api/routes/commonRoutes/index.js'];
 
+// swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
 swaggerAutogen()(outputFile, endpointsFiles, doc);

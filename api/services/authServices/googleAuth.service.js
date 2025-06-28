@@ -7,8 +7,8 @@ const googleClient = new OAuth2Client(config.clientId, config.clientSecret);
 export const getGoogleProfile = async (idToken) => {
     try {
         const ticket = await googleClient.verifyIdToken({
-            idToken,
-            audience: [config.clientId],
+            idToken: idToken,
+            audience: config.clientId,
         });
 
         const data = ticket.getPayload();
