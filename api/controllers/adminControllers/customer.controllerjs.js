@@ -36,7 +36,7 @@ export const getAllUsers = async (req, res) => {
   // #swagger.summary = 'Get all users'
   // #swagger.description = 'This endpoint retrieves all users from the system.'
   try {
-    const users = await getUsers();
+    const users = await getUsers(req.query);
     return successResponse(res, users, 200, 'Users retrieved successfully');
   } catch (error) {
     console.error('Error retrieving users:', error);

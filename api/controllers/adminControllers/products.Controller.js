@@ -38,7 +38,7 @@ export const getAllProducts = async (req, res) => {
 }
 } */
     try {
-        const users = await getProducts();
+        const users = await getProducts(req.query);
         return successResponse(res, users, 200, 'Users retrieved successfully');
     } catch (error) {
         return errorResponse(res, error, 500, 'Failed to retrieve users');
