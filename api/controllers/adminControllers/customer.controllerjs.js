@@ -1,4 +1,4 @@
-import { addNewUser } from '../../services/adminServices/product.Service.js';
+import { addNewUser, getUsers } from '../../services/adminServices/customer.Service.js';
 import { successResponse, errorResponse } from '../../../utils/response.js';
 
 
@@ -16,7 +16,7 @@ export const addNewUsers = async (req, res) => {
           $Learners: 'John Doe',
           $email: 'john.doe@example.com',
           $avatar: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg',
-          $country: 'USA',
+          $country: 'India',
           $Language: 'English',
           $Occupation: 'Engineer',
           $Objective: 'Learn about organic food',
@@ -28,6 +28,18 @@ export const addNewUsers = async (req, res) => {
     return successResponse(res, result, 201);
   } catch (error) {
     console.error('Error adding new user:', error);
+    return errorResponse(res, error.message, 500);
+  }
+}
+export const getAllUsers = async (req, res) => {
+  // #swagger.tags = ['User']
+  // #swagger.summary = 'Get all users'
+  // #swagger.description = 'This endpoint retrieves all users from the system.'
+  try {
+    const users = await getUsers();
+    return successResponse(res, users, 200, 'Users retrieved successfully');
+  } catch (error) {
+    console.error('Error retrieving users:', error);
     return errorResponse(res, error.message, 500);
   }
 }

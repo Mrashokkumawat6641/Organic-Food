@@ -14,7 +14,7 @@ export const registerUser = async (req, res, next) => {
         required: true,
         schema: {
           $fullname: 'John Doe',
-          $emailaddress: ' johndoe@example.com',
+          $emailaddress: 'john.doe@example.com',
           $password: 'password123',
           $confirmpassword: 'password123',
         }
@@ -41,7 +41,7 @@ export const signin = async (req, res) => {
         description: 'User login details',
         required: true,
         schema: {
-          $emailaddress: ' johndoe@example.com', 
+          $emailaddress: 'john.doe@example.com', 
           $password: 'password123', 
         }
       } */
