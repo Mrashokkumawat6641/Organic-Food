@@ -1,4 +1,4 @@
-import { createProduct } from '../../services/adminServices/customer.service.js';
+import { createProduct, getProducts } from '../../services/adminServices/Product.service.js';
 import { successResponse, errorResponse } from '../../../utils/response.js';
 
 
@@ -29,3 +29,19 @@ export const addProduct = async (req, res) => {
         return errorResponse(res, err, 500, 'Failed to add product');
     }
 };
+export const getAllProducts = async (req, res) => {
+    // #swagger.tags = ['Product']
+    // #swagger.summary = 'Get all products'
+    // #swagger.description = 'This endpoint retrieves all products from the database.'
+    /*  #swagger.responses[200] = {
+          description: 'Products retrieved successfully',
+}
+} */
+    try {
+        const users = await getProducts();
+        return successResponse(res, users, 200, 'Users retrieved successfully');
+    } catch (error) {
+        return errorResponse(res, error, 500, 'Failed to retrieve users');
+
+    }
+}

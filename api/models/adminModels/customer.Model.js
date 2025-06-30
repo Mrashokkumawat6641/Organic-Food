@@ -3,53 +3,58 @@ import { countryEnum, languageEnum } from '../common.model.js'
 import mongoose from 'mongoose';
 
 const ProductsSchema = new mongoose.Schema({
-    title: {
+    id: {
+        type: Number,
+        unique: true,
+        required: true
+    },
+    Learners: {
         type: String,
         required: true
     },
-    productImage: {
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
+        match: [
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            'Please enter a valid email address',
+        ],
+    },
+    avatar: {
         type: String,
         required: false || true,
-        default: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg'
-
+        default: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7t   zqwlr1m.jpg'
     },
-    description: {
+    country: {
         type: String,
-        required: true,
-    },
-    price: {
-        type: Number,
+        enum: countryEnum,
         required: true
     },
-    discount: {
-        type: Number,
+    Language: {
+        type: String,
+        enum: languageEnum,
         required: true,
 
     },
-    category: {
+    Occupation: {
         type: String,
         required: true
     },
-    rating: {
-        type: Number,
-        required: true
-    },
-    warrantyPeriod: {
+    Objective: {
         type: String,
         required: true
     },
-    returnPolicy: {
-        type: String,
-        required: true
-    },
-    stock: {
-        type: Number,
+    Subscription: {
+        type: Boolean,
         required: true
     },
 }, { timestamps: true });
 
 
-const Products = mongoose.model('Customer', ProductsSchema);
+const Products = mongoose.model('Products', ProductsSchema);
 
 
 
