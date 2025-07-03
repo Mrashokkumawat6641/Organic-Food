@@ -8,10 +8,20 @@ export const generateToken = (user) => {
     userId: user._id,
     emailaddress: user.emailaddress,
     fullname: user.fullname,
-    role: user.role || 'user', 
+    role: user.role || 'user',
   };
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 };
+export const generateSportsToken = (user) => {
+  const payload = {
+    userId: user._id,
+    fullname: user.fullname,
+    emailaddress: user.emailaddress,
+    role: user.role || 'user',
+  };
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
+};
+
 export const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -32,3 +42,4 @@ export const authMiddleware = async (req, res, next) => {
     return res.status(401).json({ message: 'Invalid or expired token' });
   }
 };
+

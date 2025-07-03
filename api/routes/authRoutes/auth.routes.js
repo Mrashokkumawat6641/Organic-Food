@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, signin, logout, getAlluser } from '../../controllers/authController/auth.controller.js';
+import { registerUser, signin, logout, getAlluser, sportsRegister, sportsLogin, sportAllUsers } from '../../controllers/authController/auth.controller.js';
 import { validateBody } from '../../../middlewares/validate.middleware.js';
 import { isAdmin } from '../../../middlewares/admin.middleware.js';
 import { registerSchema } from '../../validators/authValidators/auth.validator.js'
@@ -13,6 +13,10 @@ router.post('/signin', validateBody(loginSchema), signin)
 router.post('/logout', authMiddleware, logout);
 router.get('/getAllUsers', getAlluser);
 
+
+router.post('/sportsRegister', sportsRegister);
+router.post('/sportsLogin', sportsLogin);
+router.get('/sportAllUsers', authMiddleware, sportAllUsers);
 router.get('/google',
 
     // #swagger.tags = ['GoogleAuth']
