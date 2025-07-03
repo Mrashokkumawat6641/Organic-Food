@@ -181,23 +181,29 @@ export const sportsRegisterService = async ({ name, mobile, email, password, con
     token,
   };
 };
-
 export const sportsLoginService = async ({ mobile, email, password }) => {
-  if (!mobile || !password) {
-    throw new Error('Mobile and password are required');
-  }
-  if (!email || !password) {
-    throw new CustomError('Email and password are required')
+  if ((!mobile && !email) || !password) {
+    throw new Error('Either mobile or email and password are required');
   }
 
-  const user = await SportsUser.findOne({ mobile, email });
-  if (!user) {
-    throw new Error('Invalid mobile or password');
+  let user;
+  if (mobile && password) {
+    user = await SportsUser.findOne({ mobile });
+    if (!user) {
+      throw new Error('Invalid mobile or password');
+    }
+  } else if (email && password) {
+    user = await SportsUser.findOne({ email });
+    if (!user) {
+      throw new Error('Invalid email or password');
+    }
+  } else {
+    throw new Error('Invalid login credentials');
   }
 
   const isMatch = await bcryptjs.compare(password, user.password);
   if (!isMatch) {
-    throw new Error('Invalid mobile or password');
+    throw new Error('Invalid credentials');
   }
 
   const token = generateSportsToken(user);
