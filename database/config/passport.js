@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import User from '../../api/models/authmodels/auth.model.js';
+import { User } from '../../api/models/authmodels/auth.model.js';
 import { GOOGLE_CALLBACK_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '../../env.js';
 
 // Google OAuth Strategy

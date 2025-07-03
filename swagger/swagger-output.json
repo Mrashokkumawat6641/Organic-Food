@@ -170,6 +170,123 @@
         }
       }
     },
+    "/auth/sportsRegister": {
+      "post": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Sports user registration",
+        "description": "This endpoint allows sports users to register by providing their details.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Sports user registration details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Virat Kohli"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "john.doe@example.com"
+                },
+                "mobile": {
+                  "type": "string",
+                  "example": "9876543210"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password123"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "password123"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "mobile",
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/sportsLogin": {
+      "post": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Sports user login",
+        "description": "This endpoint allows sports users to log in using mobile and password.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Sports user login details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "type": "string",
+                  "example": "9876543210"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password123"
+                }
+              },
+              "required": [
+                "mobile",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/sportAllUsers": {
+      "get": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Get all sports users",
+        "description": "This endpoint retrieves all registered sports users.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all sports users"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/auth/google": {
       "get": {
         "tags": [

@@ -1,4 +1,4 @@
-import { register, loginuser, logoutUser, getAllUsers } from '../../services/authServices/auth.service.js';
+import { register, loginuser, logoutUser, getAllUsers, sportsRegisterService, getAllSportsUsers, sportsLoginService } from '../../services/authServices/auth.service.js';
 import logger from '../../../utils/logger.js';
 import { successResponse, errorResponse } from '../../../utils/response.js';
 import { token } from 'morgan';
@@ -107,3 +107,74 @@ export const getAlluser = async (req, res) => {
     return errorResponse(res, error.message, 500);
   }
 }
+export const sportsRegister = async (req, res) => {
+  // #swagger.tags = ['SportsAuth']
+  // #swagger.summary = 'Sports user registration'
+  // #swagger.description = 'This endpoint allows sports users to register by providing their details.'
+  /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Sports user registration details',
+        required: true,
+        schema: {
+          $name: 'Virat Kohli',
+          $email: 'john.doe@example.com',
+          $mobile: '9876543210',
+          $password: 'password123',
+          $confirmPassword: 'password123'
+        }
+      } */
+  try {
+    const result = await sportsRegisterService(req.body);
+    return successResponse(res, {
+      message: result.message,
+      userId: result.userId,
+      token: result.token,
+    }, 201);
+  } catch (error) {
+    logger.error('Sports Register error:', error);
+    return errorResponse(res, error.message, 500);
+  }
+};
+
+export const sportsLogin = async (req, res) => {
+  // #swagger.tags = ['SportsAuth']
+  // #swagger.summary = 'Sports user login'
+  // #swagger.description = 'This endpoint allows sports users to log in using mobile and password.'
+  /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Sports user login details',
+        required: true,
+        schema: {
+          $mobile: '9876543210',
+          $password: 'password123'
+        }
+      } */
+  try {
+    const result = await sportsLoginService(req.body);
+    return successResponse(res, {
+      message: 'Login successful',
+      token: result.token,
+      user: result.user,
+    }, 200);
+  } catch (error) {
+    logger.error('Sports Login error:', error);
+    return errorResponse(res, error.message, 401);
+  }
+};
+
+export const sportAllUsers = async (req, res) => {
+  // #swagger.tags = ['SportsAuth']
+  // #swagger.summary = 'Get all sports users'
+  // #swagger.description = 'This endpoint retrieves all registered sports users.'
+  /*  #swagger.responses[200] = {
+        description: 'List of all sports users',
+    }
+  */
+  try {
+    const users = await getAllSportsUsers();
+    return successResponse(res, { users }, 200);
+  } catch (error) {
+    logger.error('Get all sports users error:', error);
+    return errorResponse(res, error.message, 500);
+  }
+};

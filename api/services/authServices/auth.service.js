@@ -1,9 +1,9 @@
-import User from '../../models/authmodels/auth.model.js';
+import { User, SportsUser } from '../../models/authmodels/auth.model.js';
 import bcryptjs from 'bcryptjs';
-import { sendEmail } from '../../../utils/email.js';
-import jwt from 'jsonwebtoken';
-import { generateToken } from '../../../middlewares/auth.middleware.js';
+import { sendEmail, sendSportsEmail } from '../../../utils/email.js';
+import { generateSportsToken, generateToken } from '../../../middlewares/auth.middleware.js';
 import { getRedisClient } from '../../../database/redis/redis.js';
+import CustomError from '../../../utils/response.js';
 
 const HASHVALUE = process.env.HASHVALUE || '10';
 
@@ -84,11 +84,8 @@ export const loginuser = async ({ emailaddress, password }) => {
     throw new Error('Invalid email or password');
   }
 
-  const token = jwt.sign(
-    { id: user._id, emailaddress: user.emailaddress },
-    process.env.JWT_SECRET,
-    { expiresIn: '1d' }
-  );
+  const token = generateSportsToken(isMatch);
+
 
   console.log('Generated token:', token);
 
@@ -129,3 +126,123 @@ export const getAllUsers = async () => {
   }
   return users;
 }
+
+
+export const sportsRegisterService = async ({ name, mobile, email, password, confirmPassword }) => {
+  if (!name || !mobile || !email || !password || !confirmPassword) {
+    throw new Error('All fields are required');
+  }
+
+  if (password.length < 6) {
+    throw new Error('Password must be at least 6 characters long');
+  }
+  if (password !== confirmPassword) {
+    throw new Error('Passwords do not match');
+  }
+
+  const existingUser = await SportsUser.findOne({ mobile });
+  if (existingUser) {
+    throw new Error('Mobile number already exists, please use a different mobile');
+  }
+
+  const newUser = new SportsUser({
+    name,
+    email,
+    mobile,
+    password,
+  });
+
+  await newUser.save();
+  const token = generateSportsToken(newUser);
+
+  try {
+    const subject = 'Welcome to Sports League!';
+    const html = `
+      <h2>Welcome to Sports League, ${name}!</h2>
+      <p>We’re thrilled to have you join the community of players, fans, and teams.</p>
+      <p>Start exploring matches, joining teams, and tracking your stats.</p>
+      <p>🏆 Let the game begin!</p>
+      <br>
+      <p>Best regards,<br/>Sports League Team</p>
+    `;
+
+    await sendSportsEmail(
+      newUser.email,
+      subject,
+      'Welcome to Sports League!',
+      html
+    );
+  } catch (error) {
+    console.error('Failed to send welcome email:', error.message);
+  }
+  return {
+    message: 'Sports user registered successfully',
+    userId: newUser._id,
+    token,
+  };
+};
+
+export const sportsLoginService = async ({ mobile, email, password }) => {
+  if (!mobile || !password) {
+    throw new Error('Mobile and password are required');
+  }
+  if (!email || !password) {
+    throw new CustomError('Email and password are required')
+  }
+
+  const user = await SportsUser.findOne({ mobile, email });
+  if (!user) {
+    throw new Error('Invalid mobile or password');
+  }
+
+  const isMatch = await bcryptjs.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error('Invalid mobile or password');
+  }
+
+  const token = generateSportsToken(user);
+
+  try {
+    const subject = 'Sports League Login Notification';
+    const html = `
+      <h2>Hello, ${user.name}!</h2>
+      <p>You have successfully logged in to Sports League.</p>
+      <p>If this wasn't you, please contact support immediately.</p>
+      <br>
+      <p>Best regards,<br/>Sports League Team</p>
+    `;
+
+    await sendSportsEmail(
+      user.email,
+      subject,
+      'You have successfully logged in.',
+      html
+    );
+  } catch (error) {
+    console.error('Failed to send login email:', error.message);
+  }
+
+  return {
+    token,
+    user: {
+      id: user._id,
+      name: user.name,
+      mobile: user.mobile,
+      email: user.email
+    }
+  };
+};
+
+export const getAllSportsUsers = async () => {
+  const users = await SportsUser.find({}, '-password -confirmPassword');
+
+  if (!users || users.length === 0) {
+    throw new Error('No sports users found');
+  }
+  const token = generateSportsToken(users);
+
+  return {
+    users,
+    token
+  };
+};

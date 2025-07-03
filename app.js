@@ -21,6 +21,9 @@ const corsOptions = {
   origin: [
     '*',
     'http://localhost:5173',
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'http://10.146.216.8:3000',
     'https://assuring-javelin-smoothly.ngrok-free.app',
     'http://152.58.70.211:5173',
     'http://[2409:40d4:32:74b6:486a:76ff:fe41:823b]:5173',
