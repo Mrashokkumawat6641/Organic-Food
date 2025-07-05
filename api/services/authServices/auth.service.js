@@ -84,7 +84,7 @@ export const loginuser = async ({ emailaddress, password }) => {
     throw new Error('Invalid email or password');
   }
 
-  const token = generateSportsToken(isMatch);
+  const token = generateToken(isMatch);
 
 
   console.log('Generated token:', token);

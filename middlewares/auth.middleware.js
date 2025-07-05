@@ -15,8 +15,8 @@ export const generateToken = (user) => {
 export const generateSportsToken = (user) => {
   const payload = {
     userId: user._id,
-    fullname: user.fullname,
-    emailaddress: user.emailaddress,
+    name: user.name,
+    email: user.email,
     role: user.role || 'user',
   };
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
