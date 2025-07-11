@@ -7,7 +7,7 @@ const config = {
     clientSecret: GOOGLE_CLIENT_SECRET,
     
 };
-// console.log(GOOGLE_CLIENT_ID);
+
 
 validateConfig(config, ['clientId', 'clientSecret']);
 

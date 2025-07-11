@@ -622,6 +622,120 @@
           }
         }
       }
+    },
+    "/sports_Event/SportsRegistraion/registerPlayer": {
+      "post": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Sports user login",
+        "description": "This endpoint allows sports users to log in using mobile and password.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Sports user login details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coachname": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "middleName": {
+                  "type": "string",
+                  "example": "Michael"
+                },
+                "photo": {
+                  "type": "string",
+                  "example": "https://example.com/photo.jpg"
+                },
+                "age": {
+                  "type": "string",
+                  "example": "35"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Jaipur"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "Rajasthan"
+                },
+                "mobile": {
+                  "type": "string",
+                  "example": "9876543210"
+                },
+                "altMobile": {
+                  "type": "string",
+                  "example": "9876543211"
+                },
+                "selectedGameType": {
+                  "type": "string",
+                  "example": "outdoor"
+                },
+                "selectedGame": {
+                  "type": "string",
+                  "example": "Cricket"
+                },
+                "playerName": {
+                  "type": "string",
+                  "example": "Rahul Sharma"
+                },
+                "playerAge": {
+                  "type": "string",
+                  "example": "19"
+                },
+                "playerCity": {
+                  "type": "string",
+                  "example": "Ajmer"
+                },
+                "playerState": {
+                  "type": "string",
+                  "example": "Rajasthan"
+                },
+                "playerPhoto": {
+                  "type": "string",
+                  "example": "https://example.com/player.jpg"
+                },
+                "playerAdharPhoto": {
+                  "type": "string",
+                  "example": "https://example.com/adhar.jpg"
+                }
+              },
+              "required": [
+                "coachname",
+                "middleName",
+                "photo",
+                "age",
+                "gender",
+                "city",
+                "state",
+                "mobile",
+                "altMobile",
+                "selectedGameType",
+                "selectedGame",
+                "playerName",
+                "playerAge",
+                "playerCity",
+                "playerState",
+                "playerPhoto",
+                "playerAdharPhoto"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "security": [
