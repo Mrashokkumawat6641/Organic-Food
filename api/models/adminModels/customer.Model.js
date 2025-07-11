@@ -26,7 +26,7 @@ const ProductsSchema = new mongoose.Schema({
     avatar: {
         type: String,
         required: false || true,
-        default: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7t   zqwlr1m.jpg'
+        default: 'https://res.cloudinary.com/dpxvet5ra/image/upload/v1748110022/xmzqvlmrdtm7tzqwlr1m.jpg'
     },
     country: {
         type: String,
@@ -37,7 +37,6 @@ const ProductsSchema = new mongoose.Schema({
         type: String,
         enum: languageEnum,
         required: true,
-
     },
     Occupation: {
         type: String,

@@ -12,7 +12,7 @@ export const sendEmail = async (to, subject, text, html = '') => {
         });
 
         const info = await transporter.sendMail({
-            from: `"Sports App" <${EMAIL_USER}>`,
+            from: `"Organic_Food App" <${EMAIL_USER}>`,
             to,
             subject,
             text,
