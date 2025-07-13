@@ -54,7 +54,7 @@ const mobileUserSchema = new mongoose.Schema({
     },
     selectedGame: {
         type: String,
-        required: true,
+        // required: true,
         enum: [
             "Badminton",
             "Table Tennis",
