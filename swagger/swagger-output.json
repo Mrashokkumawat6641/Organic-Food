@@ -736,6 +736,73 @@
           }
         }
       }
+    },
+    "/sports_Event/paypalRegistration/create-order": {
+      "post": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Create PayPal order",
+        "description": "This endpoint creates a PayPal order for sports registration.",
+        "responses": {
+          "200": {
+            "description": "Order created successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "ORDER_ID"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sports_Event/paypalRegistration/capture-order/{orderID}": {
+      "post": {
+        "tags": [
+          "SportsAuth"
+        ],
+        "summary": "Capture PayPal order",
+        "description": "This endpoint captures a PayPal order using the order ID.",
+        "parameters": [
+          {
+            "name": "orderID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "PayPal order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order captured successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "COMPLETED"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "security": [
