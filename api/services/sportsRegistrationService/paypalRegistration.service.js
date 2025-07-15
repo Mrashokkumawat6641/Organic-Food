@@ -12,8 +12,8 @@ export const createOrderService = async () => {
             purchase_units: [
                 {
                     amount: {
-                        currency_code: "USD",
-                        value: "10.00",
+                        currency_code: "INR",
+                        value: "199.00",
                     },
                 },
             ],
