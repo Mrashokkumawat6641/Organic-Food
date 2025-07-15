@@ -12,19 +12,21 @@ export const createOrderService = async () => {
             purchase_units: [
                 {
                     amount: {
-                        currency_code: "USD",
-                        value: "199.00",
-                    },
-                },
-            ],
+                        currency_code: "USD",  // ✅ ensure this is INR
+                        value: "199.00"
+                    }
+                }
+            ]
         },
         {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
-                "Content-Type": "application/json",
-            },
+                "Content-Type": "application/json"
+            }
         }
     );
+
+    console.log("✅ Backend PayPal Order Created:", response.data); // 👈 check this
 
     return response.data;
 };
